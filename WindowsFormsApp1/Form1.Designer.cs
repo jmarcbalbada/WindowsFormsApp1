@@ -34,6 +34,7 @@
             this.updateButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.excelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,11 +95,23 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // excelButton
+            // 
+            this.excelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.excelButton.Location = new System.Drawing.Point(924, 455);
+            this.excelButton.Name = "excelButton";
+            this.excelButton.Size = new System.Drawing.Size(147, 31);
+            this.excelButton.TabIndex = 6;
+            this.excelButton.Text = "Export to Excel 🗎";
+            this.excelButton.UseVisualStyleBackColor = true;
+            this.excelButton.Click += new System.EventHandler(this.excelButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 519);
+            this.Controls.Add(this.excelButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.updateButton);
@@ -121,5 +134,6 @@
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button excelButton;
     }
 }

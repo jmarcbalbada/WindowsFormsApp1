@@ -36,28 +36,33 @@ namespace WindowsFormsApp1
                 || string.IsNullOrEmpty(usernameText.Text) || string.IsNullOrEmpty(passwordText.Text)
                 || string.IsNullOrEmpty(sayingText.Text))
             {
-                valid = false;
+                MessageBox.Show("Please populate all text fields!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
-            if(maleButton.Checked == false && femaleButton.Checked == false)
+            if (maleButton.Checked == false && femaleButton.Checked == false)
             {
-
-                valid = false;
+                MessageBox.Show("Select atleast 1 gender!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
-            if(volleyballButton.Checked == false && basketballButton.Checked == false)
+            if (volleyballButton.Checked == false && basketballButton.Checked == false)
             {
-                valid = false;
+                MessageBox.Show("Select atleast 1 hobby!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
             if (!colorComboText.Items.Contains(colorComboText.Text))
             {
-                valid = false;
+                MessageBox.Show("Select your favorite color!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+
             }
 
-            if(birthdayText.Value == null)
+            if (birthdayText.Value == null)
             {
-                valid = false;
+                MessageBox.Show("Select your birthdate!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
             return valid;
@@ -91,17 +96,12 @@ namespace WindowsFormsApp1
                             birthdayText.Value.ToShortDateString()
                         );
 
-                        MessageBox.Show("User Added Successfully!");
+                        MessageBox.Show("User Added Successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("not added user exist");
+                        MessageBox.Show("Username is already taken! Try another.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                }
-                else
-                {
-                    MessageBox.Show("invalid");
 
                 }
             }

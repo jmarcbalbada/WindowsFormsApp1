@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+ 
 
 namespace WindowsFormsApp1
 {
@@ -108,7 +110,8 @@ namespace WindowsFormsApp1
 
             if (string.IsNullOrEmpty(searchText))
             {
-                dataGridView1.DataSource = null;  // Reset
+                // refresh
+                dataGridView1.DataSource = null; 
                 dataGridView1.DataSource = DataManager.UserData; 
                 return;
             }
@@ -134,6 +137,53 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void excelButton_Click(object sender, EventArgs e)
+        {
+            if(DataManager.UserData != null)
+            {
+                // create excel file
+                using (var workbook = new XLWorkbook())
+                {
+                    // worksheet
+                    var worksheet = workbook.AddWorksheet("User Data");
 
+                    DataTable dataTable = DataManager.UserData;
+
+                    // add col
+                    for (int i = 0; i < dataTable.Columns.Count; i++)
+                    {
+                        worksheet.Cell(1, i + 1).Value = dataTable.Columns[i].ColumnName;
+                    }
+
+                    // add row
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dataTable.Columns.Count; j++)
+                        {
+                            worksheet.Cell(i + 2, j + 1).Value = dataTable.Rows[i][j].ToString();
+                        }
+                    }
+
+                    // save
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Excel Files|*.xlsx";
+                    saveFileDialog.FileName = "User Data.xlsx";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        workbook.SaveAs(saveFileDialog.FileName);
+                        MessageBox.Show("Export successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No data to be exported! Populate fields first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+
+
+        }
     }
 }
